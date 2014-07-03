@@ -9,7 +9,7 @@
 #import "TestPageViewController.h"
 #import "TestViewController.h"
 
-@interface TestPageViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface TestPageViewController () <UIPageViewControllerDataSource>
 
 @property (nonatomic, strong) NSMutableArray *controllerDataSource;
 
@@ -20,18 +20,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.delegate = self;
     self.dataSource = self;
     
     self.controllerDataSource = [NSMutableArray array];
-    for (NSInteger x = 0; x < 10; x++) {
+    for (NSInteger x = 1; x <= 10; x++) {
         TestViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:NSStringFromClass([TestViewController class])];
         [controller setIndex:x];
         
         [self.controllerDataSource addObject:controller];
     }
     
-    [self setViewControllers:@[self.controllerDataSource[0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self setViewControllers:@[self.controllerDataSource[0]]
+                   direction:UIPageViewControllerNavigationDirectionForward
+                    animated:NO
+                  completion:nil];
 }
 
 #pragma mark - <UIPageViewControllerDelegate>

@@ -46,10 +46,12 @@
     
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"PageViewControllerCell"];
+        
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             self.pageViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:NSStringFromClass([TestPageViewController class])];
         });
+        
         self.pageViewController.view.frame = cell.contentView.bounds;
         [cell addSubview:self.pageViewController.view];
     } else {
